@@ -177,11 +177,6 @@
 .race-stats { gap: 12px; }
 .race-stats > div { flex: 1; border: 1px solid #ffb39645; padding: 7px 10px; background: #181621c9; }
 .race-stats span { color: #ffd5c4; }
-.race-visual .metric { border-top-color: #ffb39648; }
-.race-visual .metric strong { color: #ffd5c4; }
-.race-visual .metric strong b { color: #ff967e; font-size: 1.4em; }
-.race-meter { display: block; height: 4px; overflow: hidden; background: #ffb39635; }
-.race-meter i { display: block; width: 58.8%; height: 100%; background: #ff967e; box-shadow: 0 0 12px #ff826c; }
 
 .shroud-visual {
   border-radius: 8px;
@@ -269,11 +264,6 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .sql-art code::before { border-color: #a0edaf; background: #94e6ad24; }
-  .race-meter i { transform-origin: left; animation: race-meter-glow 4s ease-in-out infinite; }
-}
-@keyframes race-meter-glow {
-  0%, 100% { opacity: .75; }
-  50% { opacity: 1; }
 }
 
 @media (max-width: 700px) {
@@ -281,4 +271,131 @@
   .feature .project-copy h3 { font-size: clamp(41px, 9vw, 55px); }
   .shroud-visual { padding: 16px; }
   .quiz-flower { font-size: 95px; right: 20px; }
+}
+/* Selected project cards */
+.race-flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin: 12px 0 0;
+  padding: 0;
+  color: #fff0e5;
+  font-size: clamp(9px, 1vw, 11px);
+  list-style: none;
+  counter-reset: race-sector;
+}
+
+.race-flow li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 7px 8px;
+  border: 1px solid #ffb39645;
+  border-top: 2px solid #ff967e;
+  background: linear-gradient(145deg, #ff896522, #181621e6 80%);
+  counter-increment: race-sector;
+}
+
+.race-flow li::before {
+  content: "S" counter(race-sector);
+  color: #ffad98;
+  letter-spacing: .13em;
+  font-weight: 700;
+}
+
+.race-flow li:nth-child(2) {
+  border-top-color: #ffd19b;
+}
+
+.race-flow li:nth-child(2)::before { color: #ffd19b; }
+
+.race-flow li:nth-child(3) {
+  border-top-color: #fff4d9;
+}
+
+.race-flow li:nth-child(3)::before { color: #fff4d9; }
+
+.feature.shroud {
+  --project-accent: #36561c;
+  background: radial-gradient(ellipse at 100% 0%, #e7f5ba, transparent 65%), #eef0db;
+  color: #222918;
+}
+
+.shroud-visual {
+  background:
+    repeating-linear-gradient(135deg, #b6ed5e25 0 1px, transparent 1px 13px),
+    radial-gradient(ellipse at 75% 10%, #596e30, #262e20 70%);
+}
+
+.shroud-visual .terminal {
+  border-color: #697d47;
+  background: #151a12;
+  box-shadow: 8px 12px 0 #12180e69;
+}
+
+.shroud-visual .terminal-head {
+  border-bottom-color: #52613f;
+  background: #293320;
+  color: #edf3df;
+}
+
+.shroud-visual .terminal-head > span:first-child,
+.shroud-visual .terminal-command > span:first-child { color: #d7ff64; }
+
+.shroud-visual .terminal-command { color: #f4f6ee; }
+
+.shroud-visual .terminal-env li {
+  border-color: #4e5e3a;
+  background: #232c1c;
+}
+
+.rank-sql-card { --project-accent: #287050; --project-tint: #e9f5ed; }
+.inksy-card { --project-accent: #9d3c50; --project-tint: #fbefed; }
+.mathquest-card { --project-accent: #463b99; --project-tint: #f0eefc; }
+.help-desk-card { --project-accent: #855019; --project-tint: #faf1dc; }
+
+.lab-card {
+  display: flex;
+  flex-direction: column;
+  background: #fbfaf5;
+}
+
+.lab-card[hidden] { display: none; }
+
+.lab-card .lab-art { flex-shrink: 0; }
+
+.lab-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background: linear-gradient(180deg, var(--project-tint), #fbfaf5 75%);
+  box-shadow: inset 0 3px var(--project-accent);
+}
+
+.lab-content > .mono { color: var(--project-accent); }
+.lab-content p { min-height: 0; }
+.lab-content .tags { margin-bottom: 18px; }
+
+.lab-content .project-links {
+  margin-top: auto;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.lab-content .project-links a {
+  border: 1px solid var(--project-accent);
+  border-radius: 4px;
+  padding: 7px 10px;
+  color: var(--project-accent);
+}
+
+.lab-content .project-links a:first-child {
+  background: var(--project-accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .feature, .lab-card { transition: box-shadow .2s ease; }
+  .feature:focus-within, .feature:hover { box-shadow: 9px 11px 0 #292b2335; }
 }
